@@ -1,6 +1,7 @@
 from flask import Flask,request,jsonify
 import json
 import os
+import logging
 
 app = Flask(__name__)
 
@@ -15,7 +16,7 @@ def welcome():
         with open(file_output, "w") as file:
             json.dump(data_list, file)
 
-    return " <h1> Hello Worldue </h1> "
+    return " <h1> Hello World </h1> "
 
 @app.route("/items/", methods=["GET"])
 def get_response():
@@ -163,11 +164,9 @@ def delete_data(id):
     else:
         return jsonify({"error": "Invalid format, please use JSON"}), 400    
 
-             
-
-
     
+
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=7000,debug=True)
+    app.run(host="0.0.0.0", debug=True)
 
 
