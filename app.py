@@ -1,14 +1,48 @@
 from flask import Flask,request,jsonify
 import json
 import os
-import logging
+import time
+from app_logger import logger
 
 app = Flask(__name__)
+
+
 
 default_data = {"name":"john doe", "age":30}
 file_output = "output.json"
 data_list = [{"id": 1, "data" : default_data}]
 
+
+@app.before_request
+def start_timer():
+    request.start_time = time.time()
+    logger.info(
+        "Request Received",
+        extra={
+            "method": request.method,
+            "url": request.url,
+            "client_ip": request.remote_addr,
+        }
+    )
+
+@app.after_request
+def log_response(response):
+
+   duration = round(time.time() - request.start_time, 3) if hasattr(request, "start_time") else -1
+   
+   logger.info(
+        "Response sent",
+        extra={
+            "method": request.method,
+            "url": request.path,
+            "status_code": response.status_code,
+            "duration": duration,
+        }
+    )
+   
+   return response
+
+    
 @app.route("/")
 def welcome():
 
@@ -62,6 +96,8 @@ def get_a_response(id):
 def post_response():
     if request.method == "POST":
         new_item = request.get_json()
+
+        request
 
         try:
             
