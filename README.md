@@ -84,10 +84,14 @@ CRUD-API-with-Flask/
    pip install -r requirements.txt
    ```
 2. Run the Flask application:
-   ```bash
+     ```bash
    python app.py
+   
+   or
+   
+   flask run --host = <your-ip-addr> --port= <your-available-port>
    ```
-3. API will be available at `http://localhost:5000`
+3. API will be available at `http://localhost: port`
 
 ## Notes
 - The API uses a local JSON file for data persistence
