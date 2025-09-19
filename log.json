@@ -1,0 +1,228 @@
+{
+    "time": "2025-09-19T20:08:35.727507",
+    "level": "INFO",
+    "logger": "CRUD-API",
+    "message": "Request Received",
+    "method": "GET",
+    "url": "http://127.0.0.1:7000/",
+    "client_ip": "127.0.0.1"
+}
+{
+    "time": "2025-09-19T20:08:35.729969",
+    "level": "INFO",
+    "logger": "CRUD-API",
+    "message": "Response sent",
+    "method": "GET",
+    "url": "/",
+    "status_code": 200,
+    "duration": 0.002
+}
+{
+    "time": "2025-09-19T20:08:35.949665",
+    "level": "INFO",
+    "logger": "CRUD-API",
+    "message": "Request Received",
+    "method": "GET",
+    "url": "http://127.0.0.1:7000/favicon.ico",
+    "client_ip": "127.0.0.1"
+}
+{
+    "time": "2025-09-19T20:08:35.950829",
+    "level": "WARNING",
+    "logger": "CRUD-API",
+    "message": "Response sent",
+    "method": "GET",
+    "url": "/favicon.ico",
+    "status_code": 404,
+    "duration": 0.001
+}
+{
+    "time": "2025-09-19T20:09:01.720658",
+    "level": "INFO",
+    "logger": "CRUD-API",
+    "message": "Request Received",
+    "method": "GET",
+    "url": "http://127.0.0.1:7000/items/",
+    "client_ip": "127.0.0.1"
+}
+{
+    "time": "2025-09-19T20:09:01.737079",
+    "level": "INFO",
+    "logger": "CRUD-API",
+    "message": "Response sent",
+    "method": "GET",
+    "url": "/items/",
+    "status_code": 200,
+    "duration": 0.016
+}
+{
+    "time": "2025-09-19T20:09:55.567689",
+    "level": "DEBUG",
+    "logger": "CRUD-API",
+    "message": "Request Received",
+    "method": "GET",
+    "url": "http://127.0.0.1:7000/",
+    "client_ip": "127.0.0.1"
+}
+{
+    "time": "2025-09-19T20:09:55.568553",
+    "level": "INFO",
+    "logger": "CRUD-API",
+    "message": "Response sent",
+    "method": "GET",
+    "url": "/",
+    "status_code": 200,
+    "duration": 0.001
+}
+{
+    "time": "2025-09-19T20:09:59.505226",
+    "level": "DEBUG",
+    "logger": "CRUD-API",
+    "message": "Request Received",
+    "method": "GET",
+    "url": "http://127.0.0.1:7000/items/",
+    "client_ip": "127.0.0.1"
+}
+{
+    "time": "2025-09-19T20:09:59.505978",
+    "level": "INFO",
+    "logger": "CRUD-API",
+    "message": "Response sent",
+    "method": "GET",
+    "url": "/items/",
+    "status_code": 200,
+    "duration": 0.001
+}
+{
+    "time": "2025-09-19T20:10:17.145941",
+    "level": "DEBUG",
+    "logger": "CRUD-API",
+    "message": "Request Received",
+    "method": "GET",
+    "url": "http://127.0.0.1:7000/items/",
+    "client_ip": "127.0.0.1"
+}
+{
+    "time": "2025-09-19T20:10:17.146856",
+    "level": "INFO",
+    "logger": "CRUD-API",
+    "message": "Response sent",
+    "method": "GET",
+    "url": "/items/",
+    "status_code": 200,
+    "duration": 0.001
+}
+{
+    "time": "2025-09-19T20:14:37.986238",
+    "level": "DEBUG",
+    "logger": "CRUD-API",
+    "message": "Request Received",
+    "method": "GET",
+    "url": "http://127.0.0.1:7000/items/",
+    "client_ip": "127.0.0.1"
+}
+{
+    "time": "2025-09-19T20:14:37.987289",
+    "level": "WARNING",
+    "logger": "CRUD-API",
+    "message": "Response sent",
+    "method": "GET",
+    "url": "/items/",
+    "status_code": 200,
+    "duration": 0.001
+}
+{
+    "time": "2025-09-19T20:15:47.528946",
+    "level": "DEBUG",
+    "logger": "CRUD-API",
+    "message": "Request Received",
+    "method": "GET",
+    "url": "http://127.0.0.1:7000/items/",
+    "client_ip": "127.0.0.1"
+}
+{
+    "time": "2025-09-19T20:15:47.529960",
+    "level": "WARNING",
+    "logger": "CRUD-API",
+    "message": "Response sent",
+    "method": "GET",
+    "url": "/items/",
+    "status_code": 200,
+    "duration": 0.001
+}
+{
+    "time": "2025-09-19T20:16:41.735383",
+    "level": "DEBUG",
+    "logger": "CRUD-API",
+    "message": "Request Received",
+    "method": "GET",
+    "url": "http://127.0.0.1:7000/items/",
+    "client_ip": "127.0.0.1"
+}
+{
+    "time": "2025-09-19T20:16:41.736202",
+    "level": "INFO",
+    "logger": "CRUD-API",
+    "message": "Response sent",
+    "method": "GET",
+    "url": "/items/",
+    "status_code": 200,
+    "duration": 0.001
+}
+{
+    "time": "2025-09-19T20:17:07.894060",
+    "level": "DEBUG",
+    "logger": "CRUD-API",
+    "message": "Request Received",
+    "method": "GET",
+    "url": "http://127.0.0.1:7000/items/",
+    "client_ip": "127.0.0.1"
+}
+{
+    "time": "2025-09-19T20:17:07.894949",
+    "level": "DEBUG",
+    "logger": "CRUD-API",
+    "message": "Response sent",
+    "method": "GET",
+    "url": "/items/",
+    "status_code": 200,
+    "duration": 0.001
+}
+{
+    "time": "2025-09-19T20:17:22.597312",
+    "level": "INFO",
+    "logger": "CRUD-API",
+    "message": "Request Received",
+    "method": "GET",
+    "url": "http://127.0.0.1:7000/items/",
+    "client_ip": "127.0.0.1"
+}
+{
+    "time": "2025-09-19T20:17:22.598155",
+    "level": "INFO",
+    "logger": "CRUD-API",
+    "message": "Response sent",
+    "method": "GET",
+    "url": "/items/",
+    "status_code": 200,
+    "duration": 0.001
+}
+{
+    "time": "19/Sep/2025 20:30:30",
+    "level": "INFO",
+    "logger": "CRUD-API",
+    "message": "Request Received",
+    "method": "GET",
+    "url": "http://127.0.0.1:7000/items/",
+    "client_ip": "127.0.0.1"
+}
+{
+    "time": "19/Sep/2025 20:30:30",
+    "level": "INFO",
+    "logger": "CRUD-API",
+    "message": "Response sent",
+    "method": "GET",
+    "url": "/items/",
+    "status_code": 200,
+    "duration": 0.011
+}

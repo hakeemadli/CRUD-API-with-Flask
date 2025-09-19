@@ -2,17 +2,16 @@ import logging
 import json
 import datetime
 
-log_file = "app_log.json"
+log_file = "log.json"
 
 class log_formatter(logging.Formatter):
     def format(self,record):
         log_record= {
-            "time" : datetime.datetime.now().isoformat(),
+            "time" : datetime.datetime.now().strftime("%d/%b/%Y %H:%M:%S"),
             "level" : record.levelname,
             "logger": record.name,
             "message" :record.getMessage(),
        }
-        
         
         # Add any extra fields from the record
         if hasattr(record, 'method'):
@@ -30,7 +29,7 @@ class log_formatter(logging.Formatter):
     
 def get_logger(name ="CRUD-API"):
     logger = logging.getLogger(name)
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
 
     if not logger.handlers:
         # Write logs to file instead of console
@@ -42,7 +41,5 @@ def get_logger(name ="CRUD-API"):
         logger.addHandler(handler_with_file)
 
     return logger
-
-
 
 logger = get_logger()

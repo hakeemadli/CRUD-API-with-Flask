@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This is a RESTful CRUD (Create, Read, Update, Delete) API built with Flask, implementing basic data operations with JSON file storage. The API provides endpoints for managing items with unique IDs and associated data.
+This is a RESTful CRUD (Create, Read, Update, Delete) API built with Flask, implementing basic data operations with JSON file storage. The API provides endpoints for managing items with unique IDs and associated data, featuring advanced logging capabilities.
 
 ## Technologies Used
 - **Flask**: Web framework (v3.1.2)
@@ -68,6 +68,117 @@ This is a RESTful CRUD (Create, Read, Update, Delete) API built with Flask, impl
 4. JSON validation
 5. RESTful architecture
 
+## Logging System Implementation
+Our Flask CRUD API implements a sophisticated logging system with JSON formatting and comprehensive request tracking.
+
+### Core Components
+
+#### 1. Logger Configuration
+**File**: `logger.py`
+**Main Components**:
+- `log_formatter` class: Custom formatter for JSON output
+- `get_logger` function: Logger initialization and configuration
+- Global `logger` instance
+
+#### 2. Logging Features
+
+##### Timestamp Format
+- Format: `DD/MMM/YYYY HH:MM:SS`
+- Example: `19/Sep/2025 20:17:07`
+- Implementation: 
+```python
+datetime.datetime.now().strftime("%d/%b/%Y %H:%M:%S")
+```
+
+##### Log Structure
+**Core Fields**:
+- `time`: Formatted timestamp
+- `level`: Log level (INFO, DEBUG, ERROR, etc.)
+- `logger`: Logger name (default: "CRUD-API")
+- `message`: Log message content
+
+**Dynamic Fields**:
+- `method`: HTTP request method
+- `url`: Request endpoint
+- `status_code`: Response status
+- `duration`: Request processing time
+- `client_ip`: Client's IP address
+
+##### Output Handlers
+1. **Stream Handler**
+   - Outputs to console
+   - Uses JSON formatting
+   - Real-time monitoring
+
+2. **File Handler**
+   - File: `log.json`
+   - Append mode
+   - UTF-8 encoding
+   - Persistent storage
+
+### Implementation Details
+
+#### Log Formatter
+```python
+class log_formatter(logging.Formatter):
+    def format(self,record):
+        log_record = {
+            "time": datetime.datetime.now().strftime("%d/%b/%Y %H:%M:%S"),
+            "level": record.levelname,
+            "logger": record.name,
+            "message": record.getMessage()
+        }
+        # Dynamic fields added if present
+        return json.dumps(log_record, indent=4)
+```
+
+#### Logger Setup
+```python
+def get_logger(name="CRUD-API"):
+    logger = logging.getLogger(name)
+    logger.setLevel(logging.DEBUG)
+    # Configure handlers
+    # ... handler setup ...
+    return logger
+```
+
+### Usage Examples
+
+#### Basic Logging
+```python
+from logger import logger
+
+# Info level logging
+logger.info("Application started")
+
+# Error logging
+logger.error("Database connection failed")
+```
+
+#### Request Logging
+```python
+logger.info("Processing request", extra={
+    'method': 'POST',
+    'url': '/items',
+    'client_ip': request.remote_addr
+})
+```
+
+#### Performance Monitoring
+```python
+logger.info("Request completed", extra={
+    'duration': process_time,
+    'status_code': 200
+})
+```
+
+### Best Practices
+1. Always include relevant context in logs
+2. Use appropriate log levels
+3. Include error details in exception logging
+4. Monitor log file size
+5. Regular log rotation (recommended)
+
 ## Project Structure
 ```
 CRUD-API-with-Flask/
@@ -91,7 +202,7 @@ CRUD-API-with-Flask/
    
    flask run --host = <your-ip-addr> --port= <your-available-port>
    ```
-3. API will be available at `http://localhost: port`
+3. API will be available at `http://localhost:port`
 
 ## Notes
 - The API uses a local JSON file for data persistence

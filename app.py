@@ -2,11 +2,9 @@ from flask import Flask,request,jsonify
 import json
 import os
 import time
-from app_logger import logger
+from logger import logger, logging
 
 app = Flask(__name__)
-
-
 
 default_data = {"name":"john doe", "age":30}
 file_output = "output.json"
@@ -16,7 +14,14 @@ data_list = [{"id": 1, "data" : default_data}]
 @app.before_request
 def start_timer():
     request.start_time = time.time()
-    logger.info(
+    
+    if app.debug:
+        log_level = "DEBUG"
+    else:
+        log_level = "INFO"
+
+    logger.log(
+        getattr(logging, log_level),
         "Request Received",
         extra={
             "method": request.method,
@@ -28,9 +33,23 @@ def start_timer():
 @app.after_request
 def log_response(response):
 
-   duration = round(time.time() - request.start_time, 3) if hasattr(request, "start_time") else -1
-   
-   logger.info(
+    if hasattr(request, "start_time") :
+        duration = round(time.time() - request.start_time, 3)
+    else :
+        duration = -1 
+
+    if app.debug:
+        log_level = "DEBUG"
+    elif response.status_code < 400:
+        log_level = "INFO"
+    elif response.status_code < 500:
+        log_level = "WARNING"
+    else:
+        log_level = "CRITICAL"
+
+
+    logger.log(
+        getattr(logging,log_level),
         "Response sent",
         extra={
             "method": request.method,
@@ -39,8 +58,8 @@ def log_response(response):
             "duration": duration,
         }
     )
-   
-   return response
+
+    return response
 
     
 @app.route("/")
@@ -171,24 +190,24 @@ def delete_data(id):
         delete_status = False
         try:
             with open(file_output,"r") as file:
-                curr_items = json.load(file)
+                current_data = json.load(file)
 
         except (json.JSONDecodeError, FileNotFoundError):
 
-            curr_items = []
+            current_data = []
 
-        for item in curr_items:
+        for item in current_data:
             if item.get("id") == id:
                 item.pop("id","data")
                 delete_status = True
         
         if delete_status:
             with open(file_output,"w") as file:
-                json.dump(curr_items,file,indent=4)
+                json.dump(current_data,file,indent=4)
         
             return jsonify({
                     "message" : f"Successfully deleting data for id: {id}",
-                    "data" : curr_items
+                    "data" : current_data
                 }), 200
 
         else:
