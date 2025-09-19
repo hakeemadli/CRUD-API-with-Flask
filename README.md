@@ -215,42 +215,10 @@ CRUD-API-with-Flask/
 
 3. API will be available at `http://localhost: port`
 
-## Notes
-
-- The API uses a local JSON file for data persistence
-- Default data structure includes name and age fields
-- Implements standard HTTP status codes for responses
-- Includes error handling for JSON operations
-```
-CRUD-API-with-Flask/
-├── app.py              # Main application file
-├── auth.py            # Authentication module
-├── logger.py          # Advanced logging configuration
-├── output.json        # Data storage
-├── log.json          # Application logs
-├── static/           # Static files directory
-│   └── index.html    # Welcome page
-├── requirements.txt   # Project dependencies
-├── LICENSE           # Project license
-└── README.md         # Project documentation
-```
-
-## Getting Started
-1. Install required dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-2. Run the Flask application:
-     ```bash
-   python app.py
-   
-   or
-   
-   flask run --host = <your-ip-addr> --port= <your-available-port>
-   ```
-3. API will be available at `http://localhost:port`
+4. You can test the end-point response/request using Postman or Curl.
 
 ## Notes
+
 - The API uses a local JSON file for data persistence
 - Default data structure includes name and age fields
 - Implements standard HTTP status codes for responses
