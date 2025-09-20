@@ -30,16 +30,35 @@ class log_formatter(logging.Formatter):
 def get_logger(name ="CRUD-API"):
     logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)
-
-    if not logger.handlers:
-        # Write logs to file instead of console
-        handler_for_stream = logging.StreamHandler()
-        handler_with_file = logging.FileHandler(log_file, mode="a", encoding="utf-8")
-        handler_with_file.setFormatter(log_formatter())
-        handler_for_stream.setFormatter(log_formatter())
-        logger.addHandler(handler_for_stream)
-        logger.addHandler(handler_with_file)
-
+    
+    # Remove any existing handlers
+    logger.handlers = []
+    
+    # Create handlers
+    handler_for_stream = logging.StreamHandler()
+    handler_with_file = logging.FileHandler(log_file, mode="a", encoding="utf-8")
+    
+    # Set formatter for both handlers
+    formatter = log_formatter()
+    handler_with_file.setFormatter(formatter)
+    handler_for_stream.setFormatter(formatter)
+    
+    # Set levels for handlers
+    handler_for_stream.setLevel(logging.DEBUG)
+    handler_with_file.setLevel(logging.DEBUG)
+    
+    # Add handlers to logger
+    logger.addHandler(handler_for_stream)
+    logger.addHandler(handler_with_file)
+    
+    # Prevent propagation to root logger
+    logger.propagate = False
+    
     return logger
 
 logger = get_logger()
+
+
+
+
+
