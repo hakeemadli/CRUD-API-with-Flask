@@ -5,11 +5,11 @@ from datetime import datetime, timedelta
 import os
 import json
 
-with open("private.pem", "r") as f:
-    PRIVATE_KEY = f.read()
+with open("private.pem", "r") as file:
+    PRIVATE_KEY = file.read()
 
-with open("public.pem", "r") as f:
-    PUBLIC_KEY = f.read()
+with open("public.pem", "r") as file:
+    PUBLIC_KEY = file.read()
 
 auth_blueprint=Blueprint("auth", __name__)
 
@@ -24,7 +24,7 @@ dummy_user =[{
 # jwt.encoding/decoding = (payload,key,algorithm)
 def token_required(f):
     @wraps(f)
-    def decorated(*args, **kwargs):
+    def wrapper(*args, **kwargs):
         auth_header = request.headers.get("Authorization")
 
         if not auth_header:
@@ -62,7 +62,7 @@ def token_required(f):
         
         return f(*args, **kwargs)
     
-    return decorated
+    return wrapper
         
 
 # Genarating Token
