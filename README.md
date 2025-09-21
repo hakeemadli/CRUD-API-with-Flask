@@ -149,19 +149,11 @@ CRUD-API-with-Flask/
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contributing 🤝
+## Contributing 🍯
 
 1. Fork the repository
 2. Create your feature branch
 3. Commit your changes
 4. Push to the branch
 5. Open a Pull Request
-
-### Best Practices
-1. Always include relevant context in logs
-2. Use appropriate log levels
-3. Include error details in exception logging
-4. Monitor log file size
-5. Regular log rotation (recommended)
-
 
