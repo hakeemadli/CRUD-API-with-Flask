@@ -183,3 +183,8 @@ cython_debug/
 #Testing file
 /log.json
 log.json
+users.json
+
+#RSA key
+private.pem
+public.pem

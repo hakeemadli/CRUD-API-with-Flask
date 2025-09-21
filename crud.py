@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint,request, jsonify,current_app
+from flask import Flask, Blueprint,request, jsonify,g
 import json
 import os
 import time
@@ -71,12 +71,14 @@ def welcome():
 
     return " <h1> Hello World </h1> "
 
+
+
 @crud_blueprint.route("/items/", methods=["GET"])
+@token_required
 def get_response():
     try:
         with open(file_output, "r") as file:
             items = json.load(file)
-            
             return jsonify({
                 "message" : "Your current list of Item",
                 "data" : items
