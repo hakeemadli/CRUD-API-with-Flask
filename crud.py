@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint,request, jsonify,g
+from flask import Flask, Blueprint,request, jsonify,current_app,g
 import json
 import os
 import time
@@ -15,6 +15,7 @@ data_list = [{"id": 1, "data" : default_data}]
 @crud_blueprint.before_request
 def start_timer():
     request.start_time = time.time()
+    user_agent= request.headers.get("User-Agent")
     
     if current_app.debug:
         log_level = "DEBUG"
@@ -28,11 +29,13 @@ def start_timer():
             "method": request.method,
             "url": request.url,
             "client_ip": request.remote_addr,
+            "user-agent": user_agent.browser,
         }
     )
 
 @crud_blueprint.after_request
 def log_response(response):
+    user_agent= request.headers.get("User-Agent")
 
     if hasattr(request, "start_time") :
         duration = round(time.time() - request.start_time, 3)
@@ -56,7 +59,8 @@ def log_response(response):
             "method": request.method,
             "url": request.path,
             "status_code": response.status_code,
-            "duration": duration,
+            "duration": f"{duration}s",
+            "user-agent": user_agent.browser,
         }
     )
 

@@ -97,6 +97,60 @@
 - JSON: Data storage
 - Blueprint: Route modularization
 
+### Implementation Examples
+
+#### Generating RSA Keys with Docker
+
+```bash
+# Create a Docker container for key generation
+docker run --rm -v ${PWD}:/keys -w /keys alpine/openssl sh -c '
+    # Generate private key
+    openssl genpkey -algorithm RSA -out private.pem -pkeyopt rsa_keygen_bits:2048;
+    # Extract public key from private key
+    openssl rsa -in private.pem -pubout -out public.pem;
+    # Set proper permissions
+    chmod 600 private.pem;
+    chmod 644 public.pem'
+```
+
+#### Client-Side Security
+
+1. Password Flow:
+
+```plaintext
+Client Plaintext → Salting → Hashing → Server Storage
+```
+
+2. HTTPS Implementation:
+
+```python
+# Using Flask with SSL/TLS
+from flask import Flask
+
+app = Flask(__name__)
+
+if __name__ == '__main__':
+    app.run(ssl_context='adhoc')  # For development
+    # For production:
+    # app.run(ssl_context=('cert.pem', 'key.pem'))
+```
+
+3. CORS Configuration:
+
+```python
+from flask_cors import CORS
+
+# Strict CORS configuration
+cors = CORS(app, resources={
+    r"/api/*": {
+        "origins": ["https://trusted-domain.com"],
+        "methods": ["GET", "POST", "PUT", "DELETE"],
+        "allow_headers": ["Authorization", "Content-Type"],
+        "max_age": 3600
+    }
+})
+```
+
 ### Security Considerations
 
 1. Password storage is currently plaintext (should be hashed)
@@ -111,4 +165,4 @@
 - Decorator pattern for token verification
 - Error handling with appropriate HTTP status codes
 - JSON response format standardization
-- Modular code structure
+- Modular code structure.
