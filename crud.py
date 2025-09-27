@@ -3,7 +3,7 @@ import json
 import os
 import time
 from auth import token_required
-from logger import logger,logging
+from logger import logger, logging, get_logger
 
 crud_blueprint = Blueprint("crud",__name__)
 
@@ -15,7 +15,7 @@ data_list = [{"id": 1, "data" : default_data}]
 @crud_blueprint.before_request
 def start_timer():
     request.start_time = time.time()
-    user_agent= request.headers.get("User-Agent")
+    user_agent = request.headers.get("User-Agent", "Unknown")
     
     if current_app.debug:
         log_level = "DEBUG"
@@ -29,18 +29,19 @@ def start_timer():
             "method": request.method,
             "url": request.url,
             "client_ip": request.remote_addr,
-            "user-agent": user_agent.browser,
+            "user_agent": user_agent
         }
     )
 
 @crud_blueprint.after_request
 def log_response(response):
-    user_agent= request.headers.get("User-Agent")
+    user_agent = request.headers.get("User-Agent", "Unknown")
+    user_id = g.user["user_id"] if hasattr(g, "user") else "anonymous"
 
-    if hasattr(request, "start_time") :
+    if hasattr(request, "start_time"):
         duration = round(time.time() - request.start_time, 3)
-    else :
-        duration = -1 
+    else:
+        duration = -1
 
     if current_app.debug:
         log_level = "DEBUG"
@@ -51,18 +52,20 @@ def log_response(response):
     else:
         log_level = "CRITICAL"
 
+    request.logger = get_logger(user_id)
 
-    logger.log(
-        getattr(logging,log_level),
-        "Response sent",
-        extra={
-            "method": request.method,
-            "url": request.path,
-            "status_code": response.status_code,
-            "duration": f"{duration}s",
-            "user-agent": user_agent.browser,
-        }
-    )
+    if hasattr(request, "logger"):
+        request.logger.log(
+            getattr(logging, log_level),
+            "Response sent",
+            extra={
+                "method": request.method,
+                "url": request.path,
+                "status_code": response.status_code,
+                "duration": f"{duration}s",
+                "user_agent": user_agent
+            }
+        )
 
     return response
 

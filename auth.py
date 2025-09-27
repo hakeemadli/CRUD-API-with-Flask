@@ -43,7 +43,8 @@ def token_required(f):
             token = auth_header.split(' ')[1]
             decoded_data = jwt.decode(token, PUBLIC_KEY, algorithms=["RS256"])
 
-            g.user = decoded_data
+            # Using thread-safe global variable flask proivde
+            g.user = {'user_id': decoded_data['user_id']}
 
         except jwt.ExpiredSignatureError:
             return jsonify({

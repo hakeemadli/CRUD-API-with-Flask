@@ -27,7 +27,20 @@ class log_formatter(logging.Formatter):
         
         return json.dumps(log_record, indent= 4)
     
-def get_logger(name ="CRUD-API"):
+def get_logger(name):
+    """Get a logger instance with the specified name.
+    
+    Args:
+        name: Required. Name to identify the logger (e.g. user_id or component name)
+    """
+    if not name:
+        raise ValueError("Logger name must be provided")
+
+    # Check if logger already exists
+    existing_logger = logging.getLogger(name)
+    if existing_logger.handlers:
+        return existing_logger
+
     logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)
     
@@ -49,6 +62,7 @@ def get_logger(name ="CRUD-API"):
     
     # Add handlers to logger
     logger.addHandler(handler_for_stream)
+    handler_with_file.setLevel(logging.DEBUG)
     logger.addHandler(handler_with_file)
     
     # Prevent propagation to root logger
@@ -56,7 +70,8 @@ def get_logger(name ="CRUD-API"):
     
     return logger
 
-logger = get_logger()
+# Initialize with a system logger for internal use
+logger = get_logger("system")
 
 
 
