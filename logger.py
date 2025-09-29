@@ -1,6 +1,4 @@
-import logging
-import json
-import datetime
+import logging, json, datetime
 
 log_file = "log.json"
 

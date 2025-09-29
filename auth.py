@@ -1,9 +1,7 @@
 from flask import request,jsonify,Blueprint,g
-import jwt
 from functools import wraps
 from datetime import datetime, timedelta
-import os
-import json
+import jwt, os, json
 
 with open("private.pem", "r") as file:
     PRIVATE_KEY = file.read()

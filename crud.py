@@ -1,9 +1,8 @@
-from flask import Flask, Blueprint,request, jsonify,current_app,g
-import json
-import os
-import time
+from flask import Blueprint,request, jsonify,current_app,g
+import logging, json, os, time
 from auth import token_required
 from logger import logger, logging, get_logger
+from utils.CORS import cors_header
 
 crud_blueprint = Blueprint("crud",__name__)
 
@@ -81,6 +80,7 @@ def welcome():
 
 
 @crud_blueprint.route("/items/", methods=["GET"])
+@cors_header
 @token_required
 def get_response():
     try:
@@ -97,6 +97,7 @@ def get_response():
             }), 400
     
 @crud_blueprint.route("/items/<int:id>", methods=["GET"])
+@cors_header
 def get_a_response(id):
 
     try:
@@ -120,6 +121,7 @@ def get_a_response(id):
         }), 400
 
 @crud_blueprint.route("/items/", methods=["POST"])
+@cors_header
 def post_response():
     if request.method == "POST":
         new_item = request.get_json()
@@ -151,6 +153,7 @@ def post_response():
         return jsonify({"error": "Invalid format, please use JSON"}), 400
     
 @crud_blueprint.route("/items/<int:id>", methods=["PUT"])
+@cors_header
 def update_list(id):
     if request.method == "PUT":
 
@@ -189,6 +192,7 @@ def update_list(id):
 
 
 @crud_blueprint.route("/items/<int:id>", methods =['DELETE'])
+@cors_header
 def delete_data(id):
 
     if request.method == "DELETE":
