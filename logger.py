@@ -26,7 +26,8 @@ class log_formatter(logging.Formatter):
         return json.dumps(log_record, indent= 4)
     
 def get_logger(name):
-    """Get a logger instance with the specified name.
+    """
+    Get a logger instance with the specified name.
     
     Args:
         name: Required. Name to identify the logger (e.g. user_id or component name)
